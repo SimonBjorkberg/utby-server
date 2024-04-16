@@ -6,7 +6,7 @@ module.exports = (app) => {
 
     app.use(
         cors({
-            origin: process.env.ORIGIN || "http://localhost:3000"
+            origin: process.env.ORIGIN
         })
     )
     app.use(express.json());
