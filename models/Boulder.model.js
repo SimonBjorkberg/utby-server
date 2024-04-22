@@ -15,8 +15,13 @@ const boulderSchema = new Schema(
             required: [true, "Description for Boulder required"]
         },
         path: {
-            type: String,
-            required: [true, "Path for Boulder Required"]
+            type: [
+                {
+                    x: Number,
+                    y: Number,
+                },
+            ],
+            required: [true, "Path for Boulder required"],
         },
         type: {
             type: String,
@@ -24,8 +29,8 @@ const boulderSchema = new Schema(
             default: "Boulder"
         },
         imageRef: {
-        type: Number,
-        default: 1,
+            type: Number,
+            default: 0,
         }
     },
     {

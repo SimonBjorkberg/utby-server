@@ -5,11 +5,11 @@ const Boulder = require('../models/Boulder.model')
 const Section = require('../models/Section.model')
 
 router.post('/create', async (req, res, next) => {
-    const { name, grade, description, path, imageRef, sectionId } = req.body
+    const { name, grade, description, path, imageRef, id } = req.body
     try {
         const createdBoulder = await Boulder.create({ name, grade, description, path, imageRef })
         await Section.findOneAndUpdate(
-            { _id: sectionId },
+            { _id: id },
             { $push: { boulders: createdBoulder._id } },
             { new: true }
         )
