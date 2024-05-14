@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const fileUploader = require("../config/cloudinary.config");
 
 const Section = require('../models/Section.model')
 const Zone = require('../models/Zone.model')
@@ -49,5 +50,12 @@ router.get('/one/:id', async (req, res, next) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 })
+
+router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
+    if (!req.file) {
+      return res.json({ message: "no file added" });
+    }
+    return res.json({ fileUrl: req.file.path, message: "image uploaded" });
+  });
 
 module.exports = router;
