@@ -23,7 +23,6 @@ const sectionSchema = new Schema(
         images: [
             {
                 type: String,
-                default: "",
             }
         ],
         type: {

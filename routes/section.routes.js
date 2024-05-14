@@ -6,11 +6,13 @@ const Section = require('../models/Section.model')
 const Zone = require('../models/Zone.model')
 
 router.post('/create', async (req, res, next) => {
-    const { name, position, images, zoneId } = req.body
+    const { name, position, uploadedImages, zone } = req.body
+    console.log("reqbody", name, position, uploadedImages, zone);
     try {
-        const createdSection = await Section.create({ name, position, images })
+        const createdSection = await Section.create({ name, position, images: uploadedImages })
+        console.log("createdSection", createdSection)
         await Zone.findOneAndUpdate(
-            { _id: zoneId },
+            { name: zone },
             { $push: { sections: createdSection._id } },
             { new: true }
         )
